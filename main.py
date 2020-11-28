@@ -33,17 +33,14 @@ def copy_matrix(A):
     return deepcopy(A)
 
 def determinant_recursive(A, total=0):
-
     if len(A) == 2 and len(A[0]) == 2:
         val = A[0][0] * A[1][1] - A[1][0] * A[0][1]
         return val
- 
     for i in range(len(A)):
         for j in range(len(A[i])):
             sign = (-1) ** (i % 2) 
             sub_det = determinant_recursive(submatrix(A, i, j))
             total += sign * A[i][j] * sub_det
-    
     return total
 
 def transpose_matrix(A):
