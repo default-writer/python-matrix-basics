@@ -58,17 +58,6 @@ def transpose_matrix(A):
         result.append(row)
     return result
 
-def reverse_matrix(A):
-    A = transpose_matrix(A)
-    result = []
-    for i in range(len(A)):
-        row = []
-        for j in range(len(A[i])):
-            Aij = A[i][j]
-            row.append(Aij)
-        result.append(row)
-    return result
-
 B1 = multiply(X, Y1)
 B2 = multiply(X, Y2)
 
@@ -82,9 +71,5 @@ T = transpose_matrix(X)
 for r in T:
    print(r)
 
-R = reverse_matrix(X)
-for r in R:
-   print(r)
-
-print(multiply(R,B1,det))
-print(multiply(R,B2,det))
+print(multiply(T,B1,det))
+print(multiply(T,B2,det))
