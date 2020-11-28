@@ -55,6 +55,9 @@ def transpose_matrix(A):
         result.append(row)
     return result
 
+print(Y1)
+print(Y2)
+
 B1 = multiply(X, Y1)
 B2 = multiply(X, Y2)
 
