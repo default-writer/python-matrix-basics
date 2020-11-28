@@ -5,13 +5,16 @@ X = [[1,4,8],
 Y1 = [8, 1, 2]
 Y2 = [1, 3, 1]
 
-def multiply(X, Y):
+def multiply(X, Y, det = 0):
     result = []
     for k in range(len(Y)):
         result.append(0)
     for i in range(len(X)):
         for j in range(len(Y)):
             result[i] += X[i][j] * Y[j]
+    if det != 0:
+        for i in range(len(Y)):
+            result[i] = int(result[i] / det);
     return result
 
 def submatrix(A, x, y):
@@ -56,13 +59,12 @@ def transpose_matrix(A):
     return result
 
 def reverse_matrix(A):
-    determinant = determinant_recursive(A)
     A = transpose_matrix(A)
     result = []
     for i in range(len(A)):
         row = []
         for j in range(len(A[i])):
-            Aij = A[i][j] / determinant
+            Aij = A[i][j]
             row.append(Aij)
         result.append(row)
     return result
@@ -73,7 +75,8 @@ B2 = multiply(X, Y2)
 print(B1)
 print(B2)
 
-print(determinant_recursive(X))
+det = determinant_recursive(X)
+print(det)
 
 T = transpose_matrix(X)
 for r in T:
@@ -83,5 +86,5 @@ R = reverse_matrix(X)
 for r in R:
    print(r)
 
-print(multiply(R,B1))
-print(multiply(R,B2))
+print(multiply(R,B1,det))
+print(multiply(R,B2,det))
