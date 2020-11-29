@@ -31,7 +31,25 @@
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
-		"ms-python.python"
+		"ms-python.python",
+	        /* Git */
+        	"mhutchie.git-graph",
+	        "eamodio.gitlens",
+        	"donjayamanne.githistory",
+	        /* Testing */
+        	"hbenl.vscode-test-explorer",
+	        "stevejpurves.cucumber",
+        	"derivitec-ltd.vscode-dotnet-adapter",
+	        /* Microsoft */
+        	"ms-python.python",
+	        "ms-python.vscode-pylance",
+        	"ms-vscode.azure-account",
+	        "ms-vsliveshare.vsliveshare-pack",
+        	"ms-vscode.vscode-node-azure-pack",
+	        "ms-vscode.powershell",
+        	"ms-dotnettools.csharp",
+	        "ms-dotnettools.vscode-dotnet-runtime",
+        	"ms-azuretools.vscode-docker"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
