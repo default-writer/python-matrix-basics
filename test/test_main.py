@@ -20,6 +20,12 @@ def test_3():
     print("")
 
     T = transpose_matrix(X)
+    
+    print(f"T:")
+    for r in T:
+        print(r)
+
+    print("")
 
     print(f"encoded_text: \n{encoded_text}")
     actual = matrix_decode(T, A, encoded_text, det)
