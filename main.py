@@ -78,7 +78,7 @@ text = """Любви, надежды, тихой славы
 
 A = [*("ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮйцукенгшщзхъфывапролджэячсмитьбю")]
 A.sort()
-A.extend(['\n',' ','.',',',';',':','!'])
+A.extend(['\n',' ','.',',',';',':','!','-'])
 print(A)
 
 print("")
@@ -127,10 +127,10 @@ print(f"det: {det}")
 print("")
 
 encoded_text = matrix_encode(X, A, text)
-print(f"encoded_text: {encoded_text}")
+print(f"encoded_text: \n{encoded_text}")
 print("")
 
-print(f"decoded_text: {matrix_decode(T, A, encoded_text, det)}")
+print(f"decoded_text: \n{matrix_decode(T, A, encoded_text, det)}")
 print("")
 
 print("enter text: ")
@@ -145,11 +145,8 @@ while True:
 text = '\n'.join(lines)
 
 encoded_text = matrix_encode(X, A, text)
-print(f"encoded_text: {encoded_text}")
+print(f"encoded_text: \n{encoded_text}")
 print("")
 
-print(f"decoded_text: {matrix_decode(T, A, encoded_text, det)}")
+print(f"decoded_text: \n{matrix_decode(T, A, encoded_text, det)}")
 print("")
-
-
-
