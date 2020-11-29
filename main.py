@@ -2,18 +2,15 @@ X = [[1,4,8],
     [3,7,2],
     [6,9,5]]
 
-Y1 = [8, 1, 2]
-Y2 = [1, 3, 1]
-
 def multiply(X, Y, det = 0):
     result = []
-    for k in range(len(Y)):
+    for k in range(len(X)):
         result.append(0)
     for i in range(len(X)):
-        for j in range(len(Y)):
-            result[i] += X[i][j] * Y[j]
+        for j in range(len(X)):
+            result[i] += X[i][j % len(X)] * Y[j]
     if det != 0:
-        for i in range(len(Y)):
+        for i in range(len(X)):
             result[i] = int(result[i] / det);
     return result
 
@@ -55,21 +52,104 @@ def transpose_matrix(A):
         result.append(row)
     return result
 
-print(Y1)
-print(Y2)
+text = """Любви, надежды, тихой славы
+Недолго нежил нас обман,
+Исчезли юные забавы,
+Как сон, как утренний туман;
+Но в нас горит еще желанье;
+Под гнетом власти роковой
+Нетерпеливою душой
+Отчизны внемлем призыванье.
+Мы ждем с томленьем упованья
+Минуты вольности святой,
+Как ждет любовник молодой
+Минуты верного свиданья.
 
-B1 = multiply(X, Y1)
-B2 = multiply(X, Y2)
+Пока свободою горим,
+Пока сердца для чести живы,
+Мой друг, отчизне посвятим
+Души прекрасные порывы!
+Товарищ, верь: взойдет она,
+Звезда пленительного счастья,
+Россия вспрянет ото сна,
+И на обломках самовластья
+Напишут наши имена!
+"""
 
-print(B1)
-print(B2)
+A = [*("ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮйцукенгшщзхъфывапролджэячсмитьбю")]
+A.sort()
+A.extend(['\n',' ','.',',',';',':','!'])
+print(A)
 
-det = determinant_recursive(X)
-print(det)
+print("")
+
+def encode(X, A, txt):
+    result = []
+    for i in range(len(txt)):
+        result.append(A.index(txt[i]) + 1)
+    return result
+
+def decode(A, index):
+    result = []
+    for i in range(len(index)):
+        result.append(A[index[i] - 1])
+    return result
+
+def matrix_encode(X, A, Y):
+    result = []
+    if len(Y) % len(X) > 0:
+        for i in range(len(Y), len(Y) + len(X) - len(Y) % len(X), 1):
+            Y += " "
+    for i in range(0, len(Y), len(X)):
+        Y1 = encode(X, A, Y[i:i+len(X)])
+        B1 = multiply(X, Y1)
+        result.extend(B1)
+    return result
+
+def matrix_decode(X, A, Y, det):
+    result = []
+    for i in range(0, len(Y), len(X)):
+        B1 = multiply(X, Y[i:i+len(X)], det)
+        result.extend(B1)
+    return "".join(decode(A, result))
 
 T = transpose_matrix(X)
+
+print(f"T:")
 for r in T:
    print(r)
 
-print(multiply(T,B1,det))
-print(multiply(T,B2,det))
+print("")
+
+det = determinant_recursive(X)
+print(f"det: {det}")
+
+print("")
+
+encoded_text = matrix_encode(X, A, text)
+print(f"encoded_text: {encoded_text}")
+print("")
+
+print(f"decoded_text: {matrix_decode(T, A, encoded_text, det)}")
+print("")
+
+print("enter text: ")
+
+lines = []
+while True:
+    line = input()
+    if line:
+        lines.append(line)
+    else:
+        break
+text = '\n'.join(lines)
+
+encoded_text = matrix_encode(X, A, text)
+print(f"encoded_text: {encoded_text}")
+print("")
+
+print(f"decoded_text: {matrix_decode(T, A, encoded_text, det)}")
+print("")
+
+
+
