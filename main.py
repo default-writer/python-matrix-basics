@@ -4,14 +4,14 @@ X = [[1,4,8],
 
 def multiply(X, Y, det = 0):
     result = []
-    for k in range(len(X)):
+    for _ in range(len(X)):
         result.append(0)
     for i in range(len(X)):
         for j in range(len(X)):
             result[i] += X[i][j % len(X)] * Y[j]
     if det != 0:
         for i in range(len(X)):
-            result[i] = int(result[i] / det);
+            result[i] = int(result[i] / det)
     return result
 
 def submatrix(A, x, y):
