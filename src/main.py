@@ -95,8 +95,16 @@ def decode(A, index):
         result.append(A[index[i] - 1])
     return result
 
+def pad(X, Y):
+    if len(Y) % len(X) > 0:
+        for _ in range(len(Y), len(Y) + len(X) - len(Y) % len(X), 1):
+            Y += " "
+    return Y
+
+
 def matrix_encode(X, A, Y):
     result = []
+    Y = pad(X, Y)
     if len(Y) % len(X) > 0:
         for i in range(len(Y), len(Y) + len(X) - len(Y) % len(X), 1):
             Y += " "
@@ -111,6 +119,7 @@ def matrix_decode(X, A, Y, det):
     for i in range(0, len(Y), len(X)):
         B1 = multiply(X, Y[i:i+len(X)], det)
         result.extend(B1)
+
     return "".join(decode(A, result))
 
 T = transpose_matrix(X)
@@ -133,20 +142,19 @@ print("")
 print(f"decoded_text: \n{matrix_decode(T, A, encoded_text, det)}")
 print("")
 
-print("enter text: ")
+# print("enter text: ")
+# lines = []
+# while True:
+#     line = input()
+#     if line:
+#         lines.append(line)
+#     else:
+#         break
+# text = '\n'.join(lines)
 
-lines = []
-while True:
-    line = input()
-    if line:
-        lines.append(line)
-    else:
-        break
-text = '\n'.join(lines)
+# encoded_text = matrix_encode(X, A, text)
+# print(f"encoded_text: \n{encoded_text}")
+# print("")
 
-encoded_text = matrix_encode(X, A, text)
-print(f"encoded_text: \n{encoded_text}")
-print("")
-
-print(f"decoded_text: \n{matrix_decode(T, A, encoded_text, det)}")
-print("")
+# print(f"decoded_text: \n{matrix_decode(T, A, encoded_text, det)}")
+# print("")
