@@ -94,20 +94,3 @@ def test_4():
     print("")
 
     assert actual == pad(X, plaintext)
-
-# print("enter text: ")
-# lines = []
-# while True:
-#     line = input()
-#     if line:
-#         lines.append(line)
-#     else:
-#         break
-# text = '\n'.join(lines)
-
-# encoded_text = matrix_encode(X, A, text)
-# print(f"encoded_text: \n{encoded_text}")
-# print("")
-
-# print(f"decoded_text: \n{matrix_decode(T, A, encoded_text, det)}")
-# print("")
