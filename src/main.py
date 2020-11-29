@@ -16,12 +16,12 @@ def multiply(X, Y, det = 0):
 
 def submatrix(A, x, y):
     result = []
-    for i in range(len(X)):
+    for i in range(len(A)):
         if i != x:
             row = []
-            for j in range(len(X[i])):
+            for j in range(len(A[i])):
                 if j != y:
-                    row.append(X[i][j])
+                    row.append(A[i][j])
             result.append(row)
     return result
 
@@ -51,6 +51,47 @@ def transpose_matrix(A):
             row.append(Aji)
         result.append(row)
     return result
+
+def encode(X, A, txt):
+    result = []
+    for i in range(len(txt)):
+        result.append(A.index(txt[i]) + 1)
+    return result
+
+def decode(A, index):
+    result = []
+    for i in range(len(index)):
+        result.append(A[index[i] - 1])
+    return result
+
+def pad(X, Y):
+    if len(Y) % len(X) > 0:
+        for _ in range(len(Y), len(Y) + len(X) - len(Y) % len(X), 1):
+            Y += " "
+    return Y
+
+def matrix_encode(X, A, Y):
+    result = []
+    Y = pad(X, Y)
+    if len(Y) % len(X) > 0:
+        for i in range(len(Y), len(Y) + len(X) - len(Y) % len(X), 1):
+            Y += " "
+    for i in range(0, len(Y), len(X)):
+        Y1 = encode(X, A, Y[i:i+len(X)])
+        B1 = multiply(X, Y1)
+        result.extend(B1)
+    return result
+
+def matrix_decode(X, A, Y, det):
+    result = []
+    for i in range(0, len(Y), len(X)):
+        B1 = multiply(X, Y[i:i+len(X)], det)
+        result.extend(B1)
+
+    return "".join(decode(A, result))
+
+T = transpose_matrix(X)
+
 
 text = """Любви, надежды, тихой славы
 Недолго нежил нас обман,
@@ -82,47 +123,6 @@ A.extend(['\n',' ','.',',',';',':','!','-'])
 print(A)
 
 print("")
-
-def encode(X, A, txt):
-    result = []
-    for i in range(len(txt)):
-        result.append(A.index(txt[i]) + 1)
-    return result
-
-def decode(A, index):
-    result = []
-    for i in range(len(index)):
-        result.append(A[index[i] - 1])
-    return result
-
-def pad(X, Y):
-    if len(Y) % len(X) > 0:
-        for _ in range(len(Y), len(Y) + len(X) - len(Y) % len(X), 1):
-            Y += " "
-    return Y
-
-
-def matrix_encode(X, A, Y):
-    result = []
-    Y = pad(X, Y)
-    if len(Y) % len(X) > 0:
-        for i in range(len(Y), len(Y) + len(X) - len(Y) % len(X), 1):
-            Y += " "
-    for i in range(0, len(Y), len(X)):
-        Y1 = encode(X, A, Y[i:i+len(X)])
-        B1 = multiply(X, Y1)
-        result.extend(B1)
-    return result
-
-def matrix_decode(X, A, Y, det):
-    result = []
-    for i in range(0, len(Y), len(X)):
-        B1 = multiply(X, Y[i:i+len(X)], det)
-        result.extend(B1)
-
-    return "".join(decode(A, result))
-
-T = transpose_matrix(X)
 
 print(f"T:")
 for r in T:
